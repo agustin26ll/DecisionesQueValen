@@ -1,0 +1,24 @@
+.panel {
+    background: var(--bg-panel);
+    padding: 40px;
+    border-radius: 20px;
+    width: 420px;
+    margin: auto;
+    margin-top: 120px;
+    text-align: center;
+}
+
+.colors {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.colors button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 3px solid white;
+    cursor: pointer;
+}

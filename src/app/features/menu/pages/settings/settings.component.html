@@ -1,0 +1,10 @@
+<div class="panel">
+    <h2>Color de fondo</h2>
+
+    <div class="colors">
+        <button *ngFor="let c of colors" [style.background]="c" (click)="change(c)">
+        </button>
+    </div>
+
+    <button routerLink="/">Volver</button>
+</div>

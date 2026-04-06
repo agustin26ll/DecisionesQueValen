@@ -1,0 +1,29 @@
+:root {
+
+    /* fondo */
+    --bg-main: #0F1117;
+    --bg-panel: #1A1D24;
+    --bg-border: #2C2F36;
+
+    /* texto */
+    --text-main: #F0F3F8;
+    --text-secondary: #A0A5B0;
+
+    /* dinero / positivo */
+    --gold: #FFC107;
+    --gold-hover: #FFD54F;
+    --success: #2E7D32;
+    --success-hover: #43A047;
+
+    /* peligro */
+    --danger: #D32F2F;
+    --danger-hover: #EF5350;
+    --warning: #FF7043;
+}
+
+/* fondo global app */
+body {
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}

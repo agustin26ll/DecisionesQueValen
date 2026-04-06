@@ -1,0 +1,83 @@
+.menu-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* tablero blur */
+.board-background {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-image: url('/assets/BaseTable.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(0.5);
+}
+
+/* overlay */
+.menu-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+
+/* logo */
+.menu-overlay img {
+    width: 37.5rem;
+    margin-bottom: 10px;
+}
+
+/* BOTONES */
+.menu-overlay button {
+    width: 260px;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .25s;
+    font-weight: 600;
+}
+
+/* jugar */
+.menu-overlay button:nth-child(2) {
+    background: var(--gold);
+    color: #0F1117;
+}
+
+.menu-overlay button:nth-child(2):hover {
+    background: var(--gold-hover);
+    transform: scale(1.08);
+}
+
+/* instrucciones */
+.menu-overlay button:nth-child(3) {
+    background: var(--bg-border);
+    color: var(--text-main);
+    border: 1px solid var(--gold);
+}
+
+.menu-overlay button:nth-child(3):hover {
+    background: #3A3F48;
+    transform: scale(1.08);
+}
+
+/* ajustes */
+.menu-overlay button:nth-child(4) {
+    background: var(--success);
+    color: white;
+}
+
+.menu-overlay button:nth-child(4):hover {
+    background: var(--success-hover);
+    transform: scale(1.08);
+}

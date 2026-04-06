@@ -1,0 +1,35 @@
+<div class="modal-backdrop">
+    <div class="modal">
+
+        <h2>Crear partida</h2>
+
+        <label>Jugadores</label>
+        <div class="player-select">
+            <button *ngFor="let n of [3,4,5]" (click)="selectPlayers(n)" [class.active]="numberOfPlayers === n">
+                {{n}}
+            </button>
+        </div>
+
+        <div class="players-grid">
+            <div class="player-card" *ngFor="let p of players; let i=index">
+
+                <div class="avatar" [style.background]="p.color">
+                    {{p.name ? p.name[0] : '?' }}
+                </div>
+
+                <input [(ngModel)]="players[i].name" placeholder="Empresa {{i+1}}"
+                    [class.error]="submitted && p.name.trim().length < 3">
+            </div>
+        </div>
+
+        <p class="error-text" *ngIf="submitted && !isValid()">
+            Cada empresa debe tener mínimo 3 caracteres
+        </p>
+
+        <div class="buttons">
+            <button class="primary" (click)="startGame()">Iniciar juego</button>
+            <button class="secondary" routerLink="/">Cancelar</button>
+        </div>
+
+    </div>
+</div>

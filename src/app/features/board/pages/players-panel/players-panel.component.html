@@ -1,0 +1,50 @@
+<div class="players-panel">
+
+    <div class="player-card" *ngFor="let player of game.players" [style.border-color]="player.color">
+
+        <!-- numero jugador -->
+        <div class="player-number" [style.background]="player.color">
+            {{player.id + 1}}
+        </div>
+
+        <!-- nombre -->
+        <div class="player-name">
+            {{player.name}}
+        </div>
+
+        <!-- NIVEL -->
+        <div class="levels">
+            <div class="level" *ngFor="let lvl of [1,2,3,4]" [class.active]="lvl <= player.level">
+            </div>
+        </div>
+
+        <!-- DINERO -->
+        <div class="money">
+            $ {{player.money}}
+        </div>
+
+        <!-- MEJORAS -->
+        <!-- MEJORAS -->
+        <div class="upgrades">
+
+            <div class="upgrade-slot">
+                <img *ngIf="player.improvements.marketing" src="assets/upgrades/marketing.png">
+            </div>
+
+            <div class="upgrade-slot">
+                <img *ngIf="player.improvements.equipo" src="assets/upgrades/equipo.png">
+            </div>
+
+            <div class="upgrade-slot">
+                <img *ngIf="player.improvements.tecnologiaAvailable" src="assets/upgrades/tecnologia.png">
+            </div>
+
+            <div class="upgrade-slot">
+                <img *ngIf="player.improvements.expansionAvailable" src="assets/upgrades/expansion.png">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

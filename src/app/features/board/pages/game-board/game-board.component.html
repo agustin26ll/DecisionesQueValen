@@ -1,0 +1,21 @@
+<div class="game-layout">
+
+    <div class="board-wrapper">
+
+        <div class="board-area">
+            <img src="assets/BaseTable.png" class="board">
+
+            <div class="player-token" *ngFor="let player of game.players" [style.left.%]="getPosition(player).x"
+                [style.top.%]="getPosition(player).y" [style.background]="player.color">
+                {{player.id+1}}
+            </div>
+
+            <app-hud [currentPlayer]="getCurrentPlayer()"></app-hud>
+            <app-dice></app-dice>
+        </div>
+
+    </div>
+
+    <app-players-panel></app-players-panel>
+
+</div>
