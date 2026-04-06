@@ -41,3 +41,23 @@
     box-shadow: 0 0 12px rgba(0, 0, 0, .6);
     transition: all .45s cubic-bezier(.22, 1, .36, 1);
 }
+
+.card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    z-index: 999;
+}
+
+.revealed-card {
+    width: 420px;
+    border-radius: 18px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .6);
+}

@@ -2,6 +2,8 @@
 
     <img [src]="getCardBack()" class="card-back">
 
-    <button class="pick-btn">Tomar carta</button>
+    <button class="draw-btn" (click)="takeCard()" [@pulse]>
+        Tomar carta
+    </button>
 
 </div>
