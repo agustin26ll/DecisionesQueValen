@@ -1,0 +1,27 @@
+.hud {
+    position: absolute;
+    width: 18%;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    border: 2px solid var(--bg-panel);
+    border-radius: 1rem;
+    background-color: var(--ligth-bg);
+}
+
+.hud-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 14px;
+    border-radius: 12px;
+    color: #000;
+    font-size: 14px;
+}
+
+.hud-line i {
+    width: 18px;
+    text-align: center;
+}

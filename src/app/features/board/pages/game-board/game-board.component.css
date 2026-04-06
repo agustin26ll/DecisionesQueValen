@@ -25,7 +25,6 @@
     object-fit: contain;
 }
 
-/* fichas */
 .player-token {
     position: absolute;
     width: 42px;

@@ -27,6 +27,6 @@ export class GameBoardComponent {
   }
 
   getCurrentPlayer() {
-    return this.game.players[0];
+    return this.game.getCurrentPlayer();
   }
 }
