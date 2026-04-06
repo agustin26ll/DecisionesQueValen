@@ -1,3 +1,4 @@
+
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +27,12 @@ export class SetupGameComponent {
 
   constructor(private gameService: GameService, private router: Router) {
     this.generatePlayers(3);
+  }
+
+  ngOnInit() {
+    if (this.gameService.hasSavedGame()) {
+      this.router.navigateByUrl('/game');
+    }
   }
 
   generatePlayers(n: number) {
