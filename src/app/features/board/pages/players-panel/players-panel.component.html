@@ -1,50 +1,50 @@
 <div class="players-panel">
-
-    <div class="player-card" *ngFor="let player of game.players" [style.border-color]="player.color">
-
-        <!-- numero jugador -->
-        <div class="player-number" [style.background]="player.color">
+    <div class="player-card" *ngFor="let player of game.players" [style.background]="getLighterColor(player.color)">
+        <div class="player-number">
             {{player.id + 1}}
         </div>
 
-        <!-- nombre -->
-        <div class="player-name">
-            {{player.name}}
-        </div>
+        <div class="card-content">
+            <div class="player-name">
+                {{player.name}}
+            </div>
 
-        <!-- NIVEL -->
-        <div class="levels">
-            <div class="level" *ngFor="let lvl of [1,2,3,4]" [class.active]="lvl <= player.level">
+            <div class="separator"></div>
+
+            <div class="level-section">
+                <div class="level-label">NIVEL:</div>
+                <div class="levels">
+                    <div class="level" *ngFor="let lvl of [1,2,3,4]" [class.active]="lvl === player.level">
+                        {{lvl}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="money-section">
+                <div class="money-label">DINERO:</div>
+                <div class="money-value">$ {{player.money | number}}</div>
+                <div class="money-underline"></div>
+            </div>
+
+            <div class="upgrades-section">
+                <div class="upgrades-label">MEJORAS:</div>
+                <div class="upgrades">
+                    <div class="upgrade-slot">
+                        <img *ngIf="player.improvements.marketing" src="assets/upgrades/marketing.png" alt="marketing">
+                    </div>
+                    <div class="upgrade-slot">
+                        <img *ngIf="player.improvements.equipo" src="assets/upgrades/equipo.png" alt="equipo">
+                    </div>
+                    <div class="upgrade-slot">
+                        <img *ngIf="player.improvements.tecnologiaAvailable" src="assets/upgrades/tecnologia.png"
+                            alt="tecnologia">
+                    </div>
+                    <div class="upgrade-slot">
+                        <img *ngIf="player.improvements.expansionAvailable" src="assets/upgrades/expansion.png"
+                            alt="expansion">
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- DINERO -->
-        <div class="money">
-            $ {{player.money}}
-        </div>
-
-        <!-- MEJORAS -->
-        <!-- MEJORAS -->
-        <div class="upgrades">
-
-            <div class="upgrade-slot">
-                <img *ngIf="player.improvements.marketing" src="assets/upgrades/marketing.png">
-            </div>
-
-            <div class="upgrade-slot">
-                <img *ngIf="player.improvements.equipo" src="assets/upgrades/equipo.png">
-            </div>
-
-            <div class="upgrade-slot">
-                <img *ngIf="player.improvements.tecnologiaAvailable" src="assets/upgrades/tecnologia.png">
-            </div>
-
-            <div class="upgrade-slot">
-                <img *ngIf="player.improvements.expansionAvailable" src="assets/upgrades/expansion.png">
-            </div>
-
-        </div>
-
     </div>
-
 </div>
