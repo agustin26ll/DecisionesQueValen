@@ -1,4 +1,5 @@
-<div class="hud">
+<div class="hud" *ngIf="game.players.length">
+
     <div class="hud-line">
         <p>
             <i class="fa-solid fa-users"></i>
@@ -9,7 +10,7 @@
     <div class="hud-line">
         <p>
             <i class="fa-solid fa-user-tie"></i>
-            <strong>Turno de:</strong> {{currentPlayer?.name }}
+            <strong>Turno de:</strong> {{currentPlayer?.name || '—'}}
         </p>
     </div>
 
@@ -26,4 +27,36 @@
             <strong>Transcurrido:</strong> {{time}}
         </p>
     </div>
+
+</div>
+<div class="hud" *ngIf="game.players.length">
+
+    <div class="hud-line">
+        <p>
+            <i class="fa-solid fa-users"></i>
+            <strong>Jugadores:</strong> {{game.getPlayersCount()}}
+        </p>
+    </div>
+
+    <div class="hud-line">
+        <p>
+            <i class="fa-solid fa-user-tie"></i>
+            <strong>Turno de:</strong> {{currentPlayer?.name || '—'}}
+        </p>
+    </div>
+
+    <div class="hud-line">
+        <p>
+            <i class="fa-solid fa-bullseye"></i>
+            <strong>Objetivo:</strong> Ser la empresa más rentable y con mayor nivel al final del juego
+        </p>
+    </div>
+
+    <div class="hud-line">
+        <p>
+            <i class="fa-solid fa-clock"></i>
+            <strong>Transcurrido:</strong> {{time}}
+        </p>
+    </div>
+
 </div>

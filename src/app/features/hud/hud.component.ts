@@ -1,17 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { Player } from '../../core/models/player.model';
 import { GameService } from '../../core/service/game.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hud',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './hud.component.html',
   styleUrl: './hud.component.css',
-  standalone: true
 })
 export class HudComponent {
 
-  @Input() currentPlayer!: Player;
+  @Input() currentPlayer?: Player;
 
   time = '00:00:00';
   interval!: any;
