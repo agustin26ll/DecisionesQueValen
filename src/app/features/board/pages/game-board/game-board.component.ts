@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HudComponent } from '../../../hud/hud.component';
 import { GameService } from '../../../../core/service/game.service';
 import { BOARD_POSITIONS } from '../../../../core/config/board.config';
-import { DiceComponent } from '../../../dice/components/dice/dice.component';
+import { DiceComponent } from '../../../dice/dice.component';
 import { PlayersPanelComponent } from '../players-panel/players-panel.component';
+import { CardPanelComponent } from '../../../card-panel/card-panel.component';
 
 @Component({
   selector: 'app-game-board',
@@ -13,7 +14,8 @@ import { PlayersPanelComponent } from '../players-panel/players-panel.component'
     HudComponent,
     DiceComponent,
     CommonModule,
-    PlayersPanelComponent
+    PlayersPanelComponent,
+    CardPanelComponent
   ],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.css'

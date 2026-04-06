@@ -22,21 +22,20 @@ export class GameService {
     gameStarted = false;
     currentTurn = 0;
     startTime!: number;
+    activeCardLevel: number | null = null;
+    waitingCardAnswer = false;
 
     constructor() {
         this.loadGame();
     }
 
-    // =========================
-    // START GAME
-    // =========================
     startGame(playersData: StartPlayer[]) {
 
         this.players = playersData.map((p, index) => ({
             id: index,
             name: p.name,
             color: p.color,
-            money: 0,
+            money: 1000000,
             level: 1,
             position: 0,
             shieldNextLoss: false,
@@ -55,9 +54,6 @@ export class GameService {
         this.saveGame();
     }
 
-    // =========================
-    // SAVE GAME
-    // =========================
     private saveGame() {
         const state: GameState = {
             players: this.players,
@@ -69,9 +65,7 @@ export class GameService {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(state));
     }
 
-    // =========================
-    // LOAD GAME
-    // =========================
+
     private loadGame() {
         const saved = localStorage.getItem(this.STORAGE_KEY);
         if (!saved) return;
@@ -84,9 +78,6 @@ export class GameService {
         this.startTime = state.startTime || Date.now();
     }
 
-    // =========================
-    // HELPERS
-    // =========================
     hasSavedGame(): boolean {
         return !!localStorage.getItem(this.STORAGE_KEY);
     }
@@ -103,9 +94,6 @@ export class GameService {
         return this.players.length;
     }
 
-    // =========================
-    // GAME ACTIONS (AUTO SAVE)
-    // =========================
     rollDice(): number {
         const value = Math.floor(Math.random() * 6) + 1;
         return value;

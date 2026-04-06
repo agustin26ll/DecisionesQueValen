@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { GameService } from '../../../../core/service/game.service';
-import { TurnEngine } from '../../../../core/engine/turn.engine';
 import { CommonModule } from '@angular/common';
+import { TurnEngine } from '../../core/engine/turn.engine';
+import { TileEngine } from '../../core/engine/tile.engine';
+import { GameService } from '../../core/service/game.service';
 
 @Component({
   selector: 'app-dice',
@@ -37,7 +38,15 @@ export class DiceComponent {
       this.result = dice;
 
       player.position += dice;
-      this.turnEngine.nextTurn(this.game.players);
+
+      const result = TileEngine.resolveTile(player, this.game.players);
+
+      if (result === "CARD") {
+        this.game.activeCardLevel = player.level;
+        this.game.waitingCardAnswer = true;
+      } else {
+        this.turnEngine.nextTurn(this.game.players);
+      }
 
       this.rolling = false;
       this.finalClass = 'show-' + dice;
