@@ -67,11 +67,17 @@ export class GameBoardComponent {
   }
 
   answer(option: 'A' | 'B') {
-    const player = this.getCurrentPlayer();
 
-    const effects = option === this.currentCard!.correctOption
-      ? this.currentCard!.effectsOnCorrect
-      : this.currentCard!.effectsOnWrong;
+    const player = this.getCurrentPlayer();
+    const card = this.currentCard!;
+
+    const success = option === card.correctOption;
+    const effects = success ? card.effectsOnCorrect : card.effectsOnWrong;
+
+    console.log("Elegido:", option);
+    console.log("Correcta:", card.correctOption);
+    console.log("¿Acertó?:", success);
+    console.log("Efectos aplicados:", effects);
 
     EffectEngine.applyEffects(effects, player, this.game.players);
 

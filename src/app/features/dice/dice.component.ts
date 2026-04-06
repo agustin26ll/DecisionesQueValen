@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TurnEngine } from '../../core/engine/turn.engine';
 import { TileEngine } from '../../core/engine/tile.engine';
 import { GameService } from '../../core/service/game.service';
 
@@ -18,15 +17,13 @@ export class DiceComponent {
   finalClass = '';
   currentColor = '#ffffff';
 
-  private turnEngine = new TurnEngine();
-
   constructor(private game: GameService) { }
 
   roll() {
 
-    if (this.rolling) return;
+    if (this.rolling || this.game.waitingCardAnswer) return;
 
-    const player = this.turnEngine.getCurrentPlayer(this.game.players);
+    const player = this.game.getCurrentPlayer();
     this.currentColor = player.color;
 
     this.rolling = true;
@@ -45,7 +42,8 @@ export class DiceComponent {
         this.game.activeCardLevel = player.level;
         this.game.waitingCardAnswer = true;
       } else {
-        this.turnEngine.nextTurn(this.game.players);
+        // 👇 SOLO GameService maneja turnos
+        this.game.nextTurn();
       }
 
       this.rolling = false;

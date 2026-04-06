@@ -8,8 +8,11 @@ export class EffectEngine {
         currentPlayer: Player,
         players: Player[]
     ) {
+        console.log("🃏 Aplicando efectos:", effects);
+
         effects.forEach(effect => {
             const targets = this.resolveTargets(effect.target, currentPlayer, players);
+            console.log("🎯 Targets:", targets.map(t => t.id));
 
             targets.forEach(player => {
                 this.applyEffect(effect, player);
@@ -37,6 +40,9 @@ export class EffectEngine {
     }
 
     private static applyEffect(effect: Effect, player: Player) {
+
+        console.log(`⚡ Efecto ${EffectType[effect.type]} a jugador ${player.id}`, effect);
+
         switch (effect.type) {
 
             case EffectType.MONEY:
@@ -45,42 +51,48 @@ export class EffectEngine {
 
             case EffectType.MOVE:
                 player.position += effect.value!;
+                console.log(`📍 Nueva posición: ${player.position}`);
                 break;
 
             case EffectType.REPEAT_TURN:
-                // lo manejará turn.engine
+                console.log("🔁 Turno extra otorgado");
                 break;
 
             case EffectType.SHIELD_NEXT_LOSS:
                 player.shieldNextLoss = true;
+                console.log("🛡 Escudo activado");
                 break;
 
             case EffectType.LEVEL_UP:
                 player.level++;
+                console.log(`⬆ Nivel nuevo: ${player.level}`);
                 break;
         }
     }
-    
+
     private static applyMoney(amount: number, player: Player) {
 
-        // escudo contra pérdidas
+        const originalAmount = amount;
+
         if (amount < 0 && player.shieldNextLoss) {
+            console.log("🛡 Escudo bloqueó pérdida");
             player.shieldNextLoss = false;
             return;
         }
 
-        // mejora equipo reduce pérdidas
         if (amount < 0 && player.improvements.equipo) {
             amount *= 0.5;
+            console.log("🧰 Equipo reduce pérdida 50%");
         }
 
-        // mejora marketing aumenta ganancias
         if (amount > 0 && player.improvements.marketing) {
             amount *= 1.5;
+            console.log("📢 Marketing aumenta ganancia 50%");
         }
 
         player.money += amount;
-
         if (player.money < 0) player.money = 0;
+
+        console.log(`💰 ${originalAmount} → aplicado ${amount} → total ${player.money}`);
     }
 }
