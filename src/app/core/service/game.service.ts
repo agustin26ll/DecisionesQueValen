@@ -133,4 +133,23 @@ export class GameService {
         this.players[playerId].improvements[key] = true;
         this.saveGame();
     }
+
+    finishTurnAfterCard() {
+        this.waitingCardAnswer = false;
+        this.activeCardLevel = null;
+
+        const player = this.getCurrentPlayer();
+
+        // detectar subida de nivel por posición
+        if (player.position >= 6 && player.level === 1) this.levelUp(player.id);
+        if (player.position >= 12 && player.level === 2) this.levelUp(player.id);
+        if (player.position >= 18 && player.level === 3) this.levelUp(player.id);
+
+        // pasar turno
+        this.nextTurn();
+
+        // guardar estado final
+        this.saveGame();
+    }
+
 }

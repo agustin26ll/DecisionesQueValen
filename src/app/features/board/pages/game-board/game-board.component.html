@@ -1,6 +1,6 @@
 <div class="game-layout">
     <app-card-panel (draw)="drawCard()"></app-card-panel>
-    
+
     <app-hud [currentPlayer]="getCurrentPlayer()"></app-hud>
     <div class="board-wrapper">
 
@@ -15,10 +15,14 @@
             <app-dice></app-dice>
         </div>
 
-        <div class="card-overlay" *ngIf="showCard" (click)="closeCard()">
+        <div class="card-overlay" *ngIf="showCard">
 
             <img [@cardReveal] [src]="currentCard?.image" class="revealed-card">
 
+            <div class="card-buttons">
+                <button (click)="answer('A')">Opción A</button>
+                <button (click)="answer('B')">Opción B</button>
+            </div>
         </div>
 
     </div>

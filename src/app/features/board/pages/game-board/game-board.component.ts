@@ -9,6 +9,7 @@ import { CardPanelComponent } from '../../../card-panel/card-panel.component';
 import { CardService } from '../../../../core/service/card.service';
 import { Card } from '../../../../core/models/card.model';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { EffectEngine } from '../../../../core/engine/effect.engine';
 
 @Component({
   selector: 'app-game-board',
@@ -57,11 +58,26 @@ export class GameBoardComponent {
   }
 
   drawCard() {
-    this.currentCard = this.cardService.drawCard();
+    const player = this.getCurrentPlayer();
+
+    this.currentCard = this.cardService.drawCard(player.level, player);
+
+    this.game.waitingCardAnswer = true; // CONGELA EL JUEGO
     this.showCard = true;
   }
 
-  closeCard() {
+  answer(option: 'A' | 'B') {
+    const player = this.getCurrentPlayer();
+
+    const effects = option === this.currentCard!.correctOption
+      ? this.currentCard!.effectsOnCorrect
+      : this.currentCard!.effectsOnWrong;
+
+    EffectEngine.applyEffects(effects, player, this.game.players);
+
+    this.game.waitingCardAnswer = false;
     this.showCard = false;
+
+    this.game.finishTurnAfterCard();
   }
 }

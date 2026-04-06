@@ -1,36 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Card } from '../models/card.model';
+import { CARD_CONFIG } from '../config/card.config';
 
 @Injectable({ providedIn: 'root' })
 export class CardService {
 
-    deck: Card[] = [
-        this.createCard(1),
-        this.createCard(2),
-        this.createCard(3),
-        this.createCard(4),
-        this.createCard(5),
-        this.createCard(6),
-        this.createCard(7),
-        this.createCard(8),
-        this.createCard(9),
-        this.createCard(10),
-    ];
+    private TOTAL_CARDS = 10;
 
-    private createCard(id: number): Card {
+    drawCard(level: number, player: any): Card {
+
+        if (!player.cardsSeen) {
+            player.cardsSeen = { 1: new Set(), 2: new Set(), 3: new Set(), 4: new Set() };
+        }
+
+        const seenCards: Set<number> = player.cardsSeen[level];
+
+        const availableCards: number[] = [];
+
+        for (let i = 1; i <= this.TOTAL_CARDS; i++) {
+            if (!seenCards.has(i)) availableCards.push(i);
+        }
+
+        if (availableCards.length === 0) {
+            player.cardsSeen[level].clear();
+            return this.drawCard(level, player);
+        }
+
+        const id = availableCards[Math.floor(Math.random() * availableCards.length)];
+        seenCards.add(id);
+
+        const formattedId = id.toString().padStart(2, '0');
+        const config = CARD_CONFIG[level]?.[id];
+
         return {
-            id: id,
-            level: 1,
-            image: `assets/cards/LVL1/Card0${id}.png`,
+            id,
+            level,
+            image: `assets/cards/LVL${level}/Card${formattedId}.png`,
             correctOption: Math.random() > 0.5 ? 'A' : 'B',
-
-            effectsOnCorrect: [],
-            effectsOnWrong: []
+            effectsOnCorrect: config?.correct ?? [],
+            effectsOnWrong: config?.wrong ?? []
         };
-    }
-
-    drawCard(): Card {
-        const random = Math.floor(Math.random() * this.deck.length);
-        return this.deck[random];
     }
 }
