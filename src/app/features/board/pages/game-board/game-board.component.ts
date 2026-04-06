@@ -23,7 +23,15 @@ export class GameBoardComponent {
   constructor(public game: GameService) { }
 
   getPosition(player: any) {
-    return BOARD_POSITIONS[player.position % BOARD_POSITIONS.length];
+    const base = BOARD_POSITIONS[player.position % BOARD_POSITIONS.length];
+
+    const offsetStep = 1.8; // separación real proporcional
+    const offset = player.id * offsetStep;
+
+    return {
+      x: base.x + offset,
+      y: base.y + offset
+    };
   }
 
   getCurrentPlayer() {

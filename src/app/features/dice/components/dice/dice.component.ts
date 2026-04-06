@@ -13,17 +13,35 @@ import { CommonModule } from '@angular/common';
 export class DiceComponent {
 
   result: number | null = null;
+  rolling = false;
+  finalClass = '';
+  currentColor = '#ffffff';
+
   private turnEngine = new TurnEngine();
 
   constructor(private game: GameService) { }
 
   roll() {
-    const dice = this.game.rollDice();
-    this.result = dice;
+
+    if (this.rolling) return;
 
     const player = this.turnEngine.getCurrentPlayer(this.game.players);
-    player.position += dice;
+    this.currentColor = player.color;
 
-    this.turnEngine.nextTurn(this.game.players);
+    this.rolling = true;
+    this.finalClass = '';
+
+    setTimeout(() => {
+
+      const dice = this.game.rollDice();
+      this.result = dice;
+
+      player.position += dice;
+      this.turnEngine.nextTurn(this.game.players);
+
+      this.rolling = false;
+      this.finalClass = 'show-' + dice;
+
+    }, 1000);
   }
 }

@@ -1,4 +1,28 @@
-<div class="dice">
-    <button (click)="roll()">Lanzar dado</button>
-    <h2 *ngIf="result">Resultado: {{result}}</h2>
+<div class="dice-wrapper">
+    <div class="dice-3d" [ngClass]="finalClass" [class.rolling]="rolling" [style.--diceColor]="currentColor"
+        (click)="roll()">
+        <div class="face one">
+            <span></span>
+        </div>
+
+        <div class="face two">
+            <span></span><span></span>
+        </div>
+
+        <div class="face three">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="face four">
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="face five">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="face six">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
 </div>
